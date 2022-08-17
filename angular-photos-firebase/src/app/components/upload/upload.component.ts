@@ -10,6 +10,7 @@ import { UploadImageService } from 'src/app/services/upload-image.service';
 export class UploadComponent implements OnInit {
 
   files: FileItem[] = [];
+  itIsOnElement: boolean = false; 
 
   constructor( public _uploadImage: UploadImageService) { }
 
@@ -18,6 +19,15 @@ export class UploadComponent implements OnInit {
 
   uploadImage() {
     this._uploadImage.uploadImageFirebase(this.files);
+  }
+
+  testOnElement(event: any) {
+    console.log(event);
+    
+  }
+
+  cleanFiles(){
+    this.files = [];
   }
 
 }
