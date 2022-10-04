@@ -23,9 +23,12 @@ export class NgDropFilesDirective {
 
   @HostListener('drop', ['$event'])
   public onDrop( event: any) {
-    
+    event.preventDefault();
+console.log('event+++++++++++++',event.dataTransfer.files.size);
 
     const transfer = this._getTransfer(event);
+    console.log('transfer---------', transfer);
+    
     if(!transfer) return;
 
     this._extractFiles(transfer.files);
@@ -35,10 +38,14 @@ export class NgDropFilesDirective {
   }
 
   private _getTransfer(event:any){
-    return event.dataTransfer ? event.dataTransfer: event.originalElement.dataTransfer;
+    console.log('event________', event);
+    
+    return event.dataTransfer ? event.dataTransfer: event.originalEvent.dataTransfer;
   }
 
   private _extractFiles(fileList: FileList){
+    console.log('fileList____', fileList);
+    
     for(const property in Object.getOwnPropertyNames(fileList)){
       const temporalyFile = fileList[property];
       
